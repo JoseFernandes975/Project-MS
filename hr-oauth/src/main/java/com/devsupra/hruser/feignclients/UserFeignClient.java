@@ -13,6 +13,5 @@ import com.devsupra.hruser.entities.User;
 public interface UserFeignClient {
 	
 	@GetMapping(value = "/search")
-	public ResponseEntity<User> findEmail(@RequestParam String email);
-
+	public ResponseEntity<User> findByEmail(@RequestParam String email);
 }
