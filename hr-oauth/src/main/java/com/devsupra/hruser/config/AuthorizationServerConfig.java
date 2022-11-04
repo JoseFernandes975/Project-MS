@@ -1,6 +1,7 @@
 package com.devsupra.hruser.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -28,6 +29,13 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Autowired
 	private AuthenticationManager authentication;
 
+	@Value("${oauth.client.name}") 
+	private String clientName;
+	
+	@Value("${oauth.client.secret}")
+	private String clientSecret;
+	
+	
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
 		security.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
@@ -35,7 +43,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-		clients.inMemory().withClient("myappname123").secret(passwordEnconder.encode("myappsecret123"))
+		clients.inMemory().withClient(clientName).secret(passwordEnconder.encode(clientSecret))
 		.scopes("read", "write").authorizedGrantTypes("password")
 		.accessTokenValiditySeconds(86400);
 	}

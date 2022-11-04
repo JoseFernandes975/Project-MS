@@ -22,7 +22,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	
 	private static final String[] OPERATOR = { "/hr-worker/**"  };
 	
-	private static final String[] ADMIN = { "/hr-user/**", "/hr-payroll/**" };
+	private static final String[] ADMIN = { "/hr-user/**", "/hr-payroll/**", "/actuator/**", "/hr-worker/actuator/**", "/hr-oauth/actuator/**" };
 	
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
@@ -37,6 +37,4 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		.antMatchers(ADMIN).hasRole("ADMIN") //para a rota Admin é permitido só para ADMIN
 		.anyRequest().authenticated(); //Qualquer outros pedidos que tiver tem que estar autenticado
 	}
-
-	
 }
