@@ -8,9 +8,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
+
 @Configuration
 public class AppConfig {
 	
+	//Coloquei os valores no application.properties pois não estava pegando o valor na hora de buildar imagem docker
 	@Value("${jwt.secret}")
 	private String jwtSecret;
 
